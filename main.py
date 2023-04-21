@@ -38,7 +38,7 @@ def quiz():
             ans2 = selected_keys[2]
             ans3 = selected_keys[3]
         else:
-            flash(f"Yanlış! Cevap: {question} = {data[question]}", 'error')
+            flash(f"Yanlış! Cevap: {answer} = {data[answer]}", 'error')
 
         session['visited'] = True
         return redirect(url_for('quiz'))
