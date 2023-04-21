@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quiz</title>
+    <style>
+        /* background ve yazı rengi */
+        body {
+            background-color: #333;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+       .quiz-box {
+    background-color: #292929;
+    border: 1px solid #3c3c3c;
+    padding: 10px;
+    margin-bottom: 20px;
+    width: 90%;
+    max-width: 600px;
+    margin: 0 auto;
+    border-radius: 10px;
+}
+
+.quiz-box form input[type="submit"] {
+    width: 150px;
+    height: 50px;
+    border-radius: 5px;
+    background-color: #00ccff;
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.quiz-box form input[type="submit"]:hover {
+    background-color: #0099cc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+        /* yanıt kutusu */
+        .answer-box {
+            background-color: #1c1c1c;
+            border: 1px solid #292929;
+            padding: 20px;
+            margin-bottom: 10px;
+        }
+
+        /* flash mesaj kutusu */
+        .flash-box {
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        .success-box {
+            background-color: #d3f8d3;
+            border: 1px solid #00cc00;
+            color: #333;
+        }
+
+        .error-box {
+            background-color: #ffe8e8;
+            border: 1px solid #cc0000;
+            color: #333;
+        }
+
+        /* quiz başlığı */
+        h1 {
+            color: #00ccff;
+        }
+    </style>
+</head>
+<body>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="flash-box {% if 'success' in message %}success-box{% elif 'error' in message %}error-box{% endif %}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    {% if question %}
+        <div class="quiz-box">
+            <h1>Quiz</h1>
+            <p>{{ question }}</p>
+            <form method="POST" action="/quiz">
+                <div class="answer-box">
+                    <input type="radio" id="options[0]" name="options" value="{{ options[0] }}" required>
+                    <label for="options[0]">{{ data[options[0]] }}</label>
+                </div>
+                <div class="answer-box">
+                    <input type="radio" id="options[1]" name="options" value="{{ options[1] }}" required>
+                    <label for="options[1]">{{ data[options[1]] }}</label>
+                </div>
+                <div class="answer-box">
+                    <input type="radio" id="options[2]" name="options" value="{{ options[2] }}" required>
+                    <label for="options[2]">{{ data[options[2]] }}</label>
+                </div>
+                <div class="answer-box">
+                    <input type="radio" id="options[3]" name="options" value="{{ options[3] }}" required>
+                    <label for="options[3]">{{ data[options[3]] }}</label>
+                </div>
+                <input type="hidden" name="answer" value="{{ question }}">
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    {% endif %}
+<footer>
+    <p>Check out my <a href="https://github.com/ozermehmett" style="color: red;">GitHub</a></p>
+</footer>
+<footer>
+    <p>This page is designed by <a href="https://twitter.com/ozermehmet911" style="color: red">Mehmet Özer</a></p>
+</footer>
+<div style="text-align: center; margin: 20px;">
+    <a href="/" style="padding: 10px 20px; background-color: #00ccff; color: #fff; border-radius: 5px; text-decoration: none;">Go to Home</a>
+</div>
+
+
+
+
+
+
+</body>
+</html>
